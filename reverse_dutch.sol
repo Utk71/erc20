@@ -23,9 +23,9 @@ contract ReverseDutchAuction {
     
     function placeBid() public payable {
         require(!auctionEnded, "Auction has ended");
-        require(block.timestamp < biddingDuration + block.timestamp, "Bidding period has ended");
-        require(msg.value > bids[msg.sender], "You already placed a higher bid");
-        require(msg.value >= currentPrice, "Your bid is lower than the current price");
+        require(block.timestamp < biddingDuration + block.timestamp);
+        require(msg.value > bids[msg.sender]);
+        require(msg.value >= currentPrice);
         
         bids[msg.sender] = msg.value;
         currentPrice = msg.value;
@@ -34,7 +34,7 @@ contract ReverseDutchAuction {
     
     function endAuction() public {
         require(!auctionEnded, "Auction has already ended");
-        require(block.timestamp >= biddingDuration + block.timestamp, "Bidding period has not ended");
+        require(block.timestamp >= biddingDuration + block.timestamp);
         
         auctionEnded = true;
         if(currentPrice < minimumPrice){
