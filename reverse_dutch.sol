@@ -22,7 +22,7 @@ contract ReverseDutchAuction {
     }
     
     function placeBid() public payable {
-        require(!auctionEnded, "Auction has ended");
+        require(!auctionEnded);
         require(block.timestamp < biddingDuration + block.timestamp);
         require(msg.value > bids[msg.sender]);
         require(msg.value >= currentPrice);
@@ -33,7 +33,7 @@ contract ReverseDutchAuction {
     }
     
     function endAuction() public {
-        require(!auctionEnded, "Auction has already ended");
+        require(!auctionEnded);
         require(block.timestamp >= biddingDuration + block.timestamp);
         
         auctionEnded = true;
